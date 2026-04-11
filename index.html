@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Материалы к Уроку Claude Code + Gemma 4 = БЕСПЛАТНО | Мастодонт</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a24;
+  --text: #f5f5f7;
+  --text-dim: #a0a0b0;
+  --text-mute: #6a6a7a;
+  --border: #24242e;
+  --accent1: #00ff88;
+  --accent2: #00d4ff;
+  --accent-grad: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+  --glow: rgba(0, 255, 136, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(0,255,136,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 40%, rgba(0,212,255,0.07) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(0,255,136,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* NAVBAR */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent 0%, #00ff88 30%, #00d4ff 70%, transparent 100%) 1;
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.brand {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: var(--text);
+  transition: opacity 0.2s;
+}
+
+.brand:hover { opacity: 0.8; }
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.nav-link:hover {
+  color: var(--text);
+  border-color: var(--accent1);
+  transform: translateY(-1px);
+}
+
+/* HERO */
+.hero {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--bg2);
+  border: 1px solid var(--accent1);
+  border-radius: 100px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent1);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  max-width: 1100px;
+}
+
+.hero h1 .grad {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero .sub {
+  font-size: clamp(17px, 2vw, 22px);
+  color: var(--text-dim);
+  max-width: 800px;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.btn-yt {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 32px;
+  background: var(--accent-grad);
+  color: #0a0a0f;
+  text-decoration: none;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  transition: all 0.25s;
+  box-shadow: 0 10px 40px rgba(0,255,136,0.2);
+}
+
+.btn-yt:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(0,255,136,0.35);
+}
+
+/* SECTIONS */
+section { position: relative; z-index: 1; }
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.h2 {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(26px, 3.5vw, 44px);
+  margin-bottom: 50px;
+  letter-spacing: -0.01em;
+}
+
+.h2 .num {
+  display: inline-block;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.7em;
+  margin-right: 14px;
+}
+
+/* LEARN GRID */
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.learn-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.learn-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-grad);
+}
+
+.learn-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent1);
+}
+
+.learn-card .icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.learn-card p {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* TOOLS */
+.tools-list {
+  display: grid;
+  gap: 16px;
+}
+
+.tool {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: all 0.25s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tool:hover {
+  border-color: var(--accent1);
+  transform: translateX(4px);
+}
+
+.tool-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.tool-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--bg3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.tool-info h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.tool-info p {
+  font-size: 13px;
+  color: var(--text-mute);
+}
+
+.tool-tag {
+  padding: 7px 14px;
+  background: rgba(0,255,136,0.1);
+  border: 1px solid var(--accent1);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent1);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* STEPS */
+.steps {
+  display: grid;
+  gap: 30px;
+}
+
+.step {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 44px 44px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-grad);
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.step-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(48px, 7vw, 82px);
+  font-weight: 800;
+  line-height: 1;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.step h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+
+.step .desc {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 26px;
+  max-width: 850px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.action {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 22px;
+  background: var(--bg3);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent1);
+}
+
+.action::before {
+  content: '▸';
+  color: var(--accent1);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: -2px;
+}
+
+.action span {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.action a {
+  color: var(--accent2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,212,255,0.3);
+}
+
+.action a:hover { border-bottom-color: var(--accent2); }
+
+/* PROMPT BLOCK */
+.prompt-block {
+  background: var(--bg3);
+  border-radius: 14px;
+  border-left: 3px solid transparent;
+  border-image: var(--accent-grad) 1;
+  border-image-slice: 1;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0,255,136,0.05);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-left-color: #00ff88;
+}
+
+.prompt-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.prompt-label .lbl {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent1);
+}
+
+.copy-btn {
+  padding: 8px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  border-color: var(--accent1);
+  color: var(--accent1);
+}
+
+.copy-btn.copied {
+  background: rgba(0,255,136,0.15);
+  border-color: var(--accent1);
+  color: var(--accent1);
+}
+
+.prompt-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* CODE BLOCK */
+.code-block {
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 26px;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--accent1);
+  position: relative;
+  overflow-x: auto;
+}
+
+.code-block::before {
+  content: '$';
+  color: var(--text-mute);
+  margin-right: 10px;
+}
+
+.tip {
+  margin-top: 18px;
+  padding: 16px 22px;
+  background: rgba(0,212,255,0.05);
+  border-left: 3px solid var(--accent2);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+.tip strong { color: var(--accent2); }
+.tip a { color: var(--accent2); text-decoration: underline; }
+
+.settings {
+  padding: 14px 22px;
+  background: rgba(0,255,136,0.04);
+  border-left: 3px solid var(--accent1);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  line-height: 1.55;
+}
+
+.settings strong { color: var(--accent1); }
+
+/* LINKS GRID */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.link-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 28px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.25s;
+}
+
+.link-card:hover {
+  border-color: var(--accent1);
+  transform: translateY(-3px);
+}
+
+.link-icon {
+  font-size: 26px;
+  width: 50px;
+  height: 50px;
+  background: var(--bg3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.link-card .txt { flex: 1; }
+.link-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.link-card p {
+  font-size: 13px;
+  color: var(--text-mute);
+}
+
+/* CTA */
+.cta-wrap {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 40px;
+}
+
+.cta {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 60px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 60px rgba(0,255,136,0.08); }
+  50% { box-shadow: 0 0 100px rgba(0,255,136,0.18); }
+}
+
+.cta-text {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vw, 32px);
+  line-height: 1.25;
+  max-width: 700px;
+}
+
+.cta-text .grad {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-btn {
+  padding: 18px 40px;
+  background: var(--accent-grad);
+  color: #0a0a0f;
+  text-decoration: none;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 12px;
+  transition: all 0.25s;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,255,136,0.3);
+}
+
+/* FOOTER */
+footer {
+  padding: 60px 40px 50px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-brand {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: var(--text);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.footer-tagline {
+  color: var(--text-mute);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.footer-yt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.footer-yt:hover {
+  border-color: var(--accent1);
+  color: var(--accent1);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-grad);
+  border-radius: 10px;
+}
+
+/* RESPONSIVE */
+@media (min-width: 2200px) {
+  .hero, .wrap, .cta-wrap { max-width: 1600px; }
+}
+
+@media (max-width: 1024px) {
+  .nav-inner { padding: 18px 28px; }
+  .hero { padding: 70px 28px 60px; }
+  .wrap { padding: 60px 28px; }
+  .cta-wrap { padding: 0 28px; }
+  .cta { padding: 50px 60px; }
+  .step { padding: 38px 34px; }
+}
+
+@media (max-width: 768px) {
+  .nav-inner { padding: 16px 20px; flex-direction: column; gap: 16px; }
+  .nav-links { justify-content: center; }
+  .hero { padding: 60px 20px 50px; }
+  .wrap { padding: 50px 20px; }
+  .cta-wrap { padding: 0 20px; }
+  .cta {
+    padding: 40px 32px;
+    flex-direction: column;
+    text-align: center;
+  }
+  .step { padding: 32px 24px; }
+  .prompt-block { padding: 20px; }
+  .tool { padding: 20px 22px; }
+  .tool-main { min-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .brand { font-size: 18px; }
+  .nav-link { padding: 8px 14px; font-size: 12px; }
+  .hero { padding: 50px 18px 40px; }
+  .btn-yt { padding: 16px 26px; font-size: 13px; width: 100%; justify-content: center; }
+  .step { padding: 28px 20px; }
+  .cta { padding: 36px 24px; }
+  .cta-btn { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://aimastodont.com/" target="_blank" class="brand">МАСТОДОНТ</a>
+    <div class="nav-links">
+      <a href="#tools" class="nav-link">Инструменты</a>
+      <a href="#steps" class="nav-link">Шаги</a>
+      <a href="#links" class="nav-link">Ссылки</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">Материалы к уроку</div>
+  <h1>Claude&nbsp;Code + Gemma&nbsp;4<br>= <span class="grad">БЕСПЛАТНО</span><br>на&nbsp;своём&nbsp;ПК</h1>
+  <p class="sub">Запусти полноценного ИИ-агента локально и экономь $2400 в год на подписке Claude Max. Работает без интернета, без лимитов, без единого цента за API.</p>
+  <a href="https://www.youtube.com/watch?v=z_uzyXCSyPk" target="_blank" class="btn-yt">▶ Смотреть на YouTube</a>
+</section>
+
+<section class="wrap">
+  <h2 class="h2"><span class="num">01</span>Что ты научишься делать</h2>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="icon">💻</div>
+      <p>Запускать Claude Code полностью бесплатно на своём ПК через локальную модель</p>
+    </div>
+    <div class="learn-card">
+      <div class="icon">⚡</div>
+      <p>Устанавливать Gemma 4 от Google локально через Ollama одной командой</p>
+    </div>
+    <div class="learn-card">
+      <div class="icon">🔌</div>
+      <p>Подключать локальную модель к фреймворку Claude Code внутри Antigravity</p>
+    </div>
+    <div class="learn-card">
+      <div class="icon">✈️</div>
+      <p>Писать код с ИИ-агентом без интернета - даже в самолёте или в бункере</p>
+    </div>
+    <div class="learn-card">
+      <div class="icon">💰</div>
+      <p>Экономить $200 в месяц на подписке Claude Max - это $2400 в год в кармане</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="tools">
+  <h2 class="h2"><span class="num">02</span>Что понадобится</h2>
+  <div class="tools-list">
+    <a href="https://ollama.com" target="_blank" class="tool">
+      <div class="tool-main">
+        <div class="tool-icon">🦙</div>
+        <div class="tool-info">
+          <h4>Ollama</h4>
+          <p>Программа для запуска локальных нейросетей одной командой</p>
+        </div>
+      </div>
+      <span class="tool-tag">БЕСПЛАТНО</span>
+    </a>
+    <a href="https://www.deepmind.google/models/gemma/gemma-4" target="_blank" class="tool">
+      <div class="tool-main">
+        <div class="tool-icon">🧠</div>
+        <div class="tool-info">
+          <h4>Gemma 4</h4>
+          <p>Открытая модель от Google под лицензией Apache 2.0</p>
+        </div>
+      </div>
+      <span class="tool-tag">БЕСПЛАТНО</span>
+    </a>
+    <a href="https://antigravity.google/" target="_blank" class="tool">
+      <div class="tool-main">
+        <div class="tool-icon">🌌</div>
+        <div class="tool-info">
+          <h4>Antigravity</h4>
+          <p>Среда разработки от Google где работает Claude Code</p>
+        </div>
+      </div>
+      <span class="tool-tag">БЕСПЛАТНО</span>
+    </a>
+    <a href="https://claude.com/product/claude-code" target="_blank" class="tool">
+      <div class="tool-main">
+        <div class="tool-icon">🔧</div>
+        <div class="tool-info">
+          <h4>Claude Code</h4>
+          <p>Фреймворк для работы с ИИ-агентом - встроен в Antigravity</p>
+        </div>
+      </div>
+      <span class="tool-tag">БЕСПЛАТНО</span>
+    </a>
+    <a href="https://console.anthropic.com" target="_blank" class="tool">
+      <div class="tool-main">
+        <div class="tool-icon">🔑</div>
+        <div class="tool-info">
+          <h4>Anthropic Console</h4>
+          <p>Нужно положить $5 на баланс как пропуск - они не спишутся</p>
+        </div>
+      </div>
+      <span class="tool-tag">$5 ПРОПУСК</span>
+    </a>
+  </div>
+</section>
+
+<section class="wrap" id="steps">
+  <h2 class="h2"><span class="num">03</span>Пошаговая инструкция</h2>
+  <div class="steps">
+
+    <div class="step">
+      <span class="step-num">01</span>
+      <h3>Установи Ollama</h3>
+      <p class="desc">Это программа, которая позволит тебе скачивать и запускать открытые нейросети прямо на своём компьютере. Работает в фоне, весит мало.</p>
+      <div class="actions">
+        <div class="action"><span>Открой <a href="https://ollama.com" target="_blank">ollama.com</a></span></div>
+        <div class="action"><span>Нажми кнопку <strong>Download</strong></span></div>
+        <div class="action"><span>Скачай версию для своей ОС (Windows / Mac / Linux)</span></div>
+        <div class="action"><span>Установи и запусти - иконка ламы появится в трее</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">02</span>
+      <h3>Спроси Claude какую версию Gemma 4 ставить</h3>
+      <p class="desc">Если не знаешь потянет ли твоё железо - сделай скриншот характеристик ПК и попроси Claude подобрать версию под твоё железо.</p>
+      <div class="actions">
+        <div class="action"><span>Открой "О системе" (Windows) или "Об этом Mac" (Mac)</span></div>
+        <div class="action"><span>Сделай скриншот окна с характеристиками</span></div>
+        <div class="action"><span>Открой Claude (claude.ai или Claude Code) и вставь скриншот</span></div>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">💬 Промпт - подбор версии</span>
+          <button class="copy-btn" data-copy="Вот мое железо, какую версию Gemma 4 от Ollama мне лучше установить?">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">Вот мое железо, какую версию Gemma 4 от Ollama мне лучше установить?</div>
+      </div>
+
+      <div class="settings"><strong>⚙️</strong> Claude порекомендует версию исходя из твоего RAM и GPU. Обычно это <code>gemma4:e4b</code> (лёгкая, ~9.6 ГБ) или <code>gemma4:27b</code> (мощная, ~16 ГБ).</div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">03</span>
+      <h3>Установи Antigravity и открой терминал</h3>
+      <p class="desc">Antigravity - это бесплатная среда разработки от Google где работает Claude Code. Именно в ней будем запускать локальную модель.</p>
+      <div class="actions">
+        <div class="action"><span>Открой <a href="https://antigravity.google/" target="_blank">antigravity.google</a></span></div>
+        <div class="action"><span>Скачай Antigravity для своей ОС и установи</span></div>
+        <div class="action"><span>Запусти Antigravity</span></div>
+        <div class="action"><span>Открой терминал внутри Antigravity: <strong>Ctrl + `</strong> (тильда)</span></div>
+      </div>
+
+      <div class="tip"><strong>💡 Подсказка:</strong> Не знаком с Antigravity? Смотри полный гайд здесь - <a href="https://www.youtube.com/watch?v=4gxd9A4L0PU" target="_blank">разбор Antigravity за 15 минут</a></div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">04</span>
+      <h3>Скачай Gemma 4 через терминал</h3>
+      <p class="desc">Одна команда - и Ollama скачает модель со всеми весами автоматически. Дальше просто ждёшь пока скачаются гигабайты бесплатной нейронки.</p>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">⌨️ Команда - скачать модель</span>
+          <button class="copy-btn" data-copy="ollama pull gemma4:e4b">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">ollama pull gemma4:e4b</div>
+      </div>
+
+      <div class="actions">
+        <div class="action"><span>Вставь команду в терминал и нажми Enter</span></div>
+        <div class="action"><span>Жди пока скачается (~9.6 ГБ, 10-15 минут в зависимости от интернета)</span></div>
+        <div class="action"><span>Когда появится "success" - модель установлена</span></div>
+      </div>
+
+      <div class="tip"><strong>💡 Совет:</strong> Если нужна другая версия - замени <code>e4b</code> на ту, которую порекомендовал Claude в Шаге 02.</div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">05</span>
+      <h3>Протестируй Gemma 4 в Ollama</h3>
+      <p class="desc">Перед интеграцией в Claude Code - убедись что модель работает. Открываешь приложение Ollama и задаёшь любой вопрос.</p>
+      <div class="actions">
+        <div class="action"><span>Открой приложение <strong>Ollama</strong> (иконка ламы)</span></div>
+        <div class="action"><span>Выбери модель <strong>gemma4:e4b</strong> в списке внизу</span></div>
+        <div class="action"><span>Задай тестовый вопрос</span></div>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">💬 Промпт - тест работы модели</span>
+          <button class="copy-btn" data-copy="Кто был самым высоким человеком из когда-либо живших на земле?">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">Кто был самым высоким человеком из когда-либо живших на земле?</div>
+      </div>
+
+      <div class="settings"><strong>✅ Проверка:</strong> Модель должна показать процесс мышления и ответить: "Роберт Уодлоу, рост 8 футов 11 дюймов". Всё сгенерировалось локально - без интернета, без API.</div>
+
+      <p class="desc" style="margin-top: 28px;"><strong>Бонус - тест мультимодальности:</strong> Gemma 4 умеет читать картинки. Сделай скриншот чего угодно, вставь в чат Ollama и спроси:</p>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">💬 Промпт - тест картинок</span>
+          <button class="copy-btn" data-copy="Что изображено на этой картинке?">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">Что изображено на этой картинке?</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">06</span>
+      <h3>Положи $5 на баланс Anthropic API</h3>
+      <p class="desc">Это "пропуск" чтобы Claude Code вообще запустился. Деньги не спишутся - вся генерация идёт через твою локальную Ollama. Один раз положил - и кодишь бесплатно до конца жизни.</p>
+      <div class="actions">
+        <div class="action"><span>Открой <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></span></div>
+        <div class="action"><span>Войди в аккаунт (или зарегистрируйся)</span></div>
+        <div class="action"><span>Пополни баланс на <strong>$5</strong> (Billing → Add credits)</span></div>
+        <div class="action"><span>Этого хватит навсегда - они лежат как верификация</span></div>
+      </div>
+
+      <div class="tip"><strong>💡 Важно:</strong> Это разовая инвестиция. $5 один раз - и кодишь бесплатно до конца жизни. Самая дешёвая инвестиция которую ты сделаешь в AI-инструменты за всё время.</div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">07</span>
+      <h3>Запусти Claude Code с Gemma 4</h3>
+      <p class="desc">В терминале Antigravity одной командой запускаешь Claude Code с селектором моделей Ollama. Он покажет список доступных моделей - выбираешь Gemma 4.</p>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">⌨️ Команда - запуск Claude с селектором</span>
+          <button class="copy-btn" data-copy="ollama launch claude">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">ollama launch claude</div>
+      </div>
+
+      <div class="actions">
+        <div class="action"><span>Нажми Enter - появится интерактивный селектор моделей</span></div>
+        <div class="action"><span>Стрелками найди <strong>gemma4:e4b</strong> в списке</span></div>
+        <div class="action"><span>Нажми Enter для выбора модели</span></div>
+      </div>
+
+      <div class="settings"><strong>⚙️ Если требуется авторизация:</strong> Набери <code>/logout</code> → потом <code>/login</code> → выбери <strong>API usage billing</strong> (НЕ Max подписку!) → выбери свою организацию где лежат $5 → авторизуйся.</div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">08</span>
+      <h3>Финальный тест - Hello World локально</h3>
+      <p class="desc">Даём локальной модели задачу создать HTML-файл. Это финальная проверка, что всё работает - ИИ-агент пишет код прямо на твоём ПК без единого байта в интернет.</p>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">💬 Промпт - создать HTML-файл</span>
+          <button class="copy-btn" data-copy="Создай в этой директории файл index.html. Сделай простую страницу с тёмным фоном и надписью 'Hello World' по центру экрана">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">Создай в этой директории файл index.html. Сделай простую страницу с тёмным фоном и надписью 'Hello World' по центру экрана</div>
+      </div>
+
+      <div class="actions">
+        <div class="action"><span>Отправь промпт в Claude Code</span></div>
+        <div class="action"><span>Gemma 4 сгенерирует код - медленнее чем Opus 4.6, это нормально для локальной модели</span></div>
+        <div class="action"><span>Подтверди изменения (Accept)</span></div>
+        <div class="action"><span>Файл создан - теперь попросим его открыть</span></div>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-label">
+          <span class="lbl">💬 Промпт - открыть файл</span>
+          <button class="copy-btn" data-copy="Отлично, а теперь открой этот файл для меня">◻ Скопировать</button>
+        </div>
+        <div class="prompt-text">Отлично, а теперь открой этот файл для меня</div>
+      </div>
+
+      <div class="settings"><strong>✅ Результат:</strong> В браузере откроется index.html - тёмный фон, "Hello World" по центру. Полностью написано и запущено локально, без единого цента за API. Это Hello World для демонстрации, но принцип тот же - можешь попросить лендинг, калькулятор, бота, автоматизацию. Ограничение только у твоего воображения.</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wrap" id="links">
+  <h2 class="h2"><span class="num">04</span>Все ссылки</h2>
+  <div class="links-grid">
+    <a href="https://ollama.com" target="_blank" class="link-card">
+      <div class="link-icon">🦙</div>
+      <div class="txt"><h4>Ollama</h4><p>ollama.com</p></div>
+    </a>
+    <a href="https://www.deepmind.google/models/gemma/gemma-4" target="_blank" class="link-card">
+      <div class="link-icon">🧠</div>
+      <div class="txt"><h4>Gemma 4 (DeepMind)</h4><p>deepmind.google</p></div>
+    </a>
+    <a href="https://antigravity.google/" target="_blank" class="link-card">
+      <div class="link-icon">🌌</div>
+      <div class="txt"><h4>Antigravity</h4><p>antigravity.google</p></div>
+    </a>
+    <a href="https://claude.com/product/claude-code" target="_blank" class="link-card">
+      <div class="link-icon">🔧</div>
+      <div class="txt"><h4>Claude Code</h4><p>claude.com/product/claude-code</p></div>
+    </a>
+    <a href="https://console.anthropic.com" target="_blank" class="link-card">
+      <div class="link-icon">🔑</div>
+      <div class="txt"><h4>Anthropic Console</h4><p>console.anthropic.com</p></div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=4gxd9A4L0PU" target="_blank" class="link-card">
+      <div class="link-icon">▶️</div>
+      <div class="txt"><h4>Полный гайд по Antigravity</h4><p>YouTube @aiBoomb</p></div>
+    </a>
+  </div>
+</section>
+
+<div class="cta-wrap">
+  <div class="cta">
+    <div class="cta-text">Пошаговый план по&nbsp;выходу<br>на&nbsp;первые <span class="grad">100к в&nbsp;ИИ</span> в&nbsp;2026</div>
+    <a href="https://t.me/mastodont_aibot?start=agency" target="_blank" class="cta-btn">ЗАБРАТЬ ПЛАН</a>
+  </div>
+</div>
+
+<footer>
+  <a href="https://aimastodont.com/" target="_blank" class="footer-brand">МАСТОДОНТ</a>
+  <div class="footer-tagline">AI и нейросети - просто, по делу</div>
+  <a href="https://www.youtube.com/@aiBoomb" target="_blank" class="footer-yt">▶ YouTube: @aiBoomb</a>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.getAttribute('data-copy');
+    try {
+      await navigator.clipboard.writeText(text);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Скопировано!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.classList.remove('copied');
+      }, 2000);
+    } catch (e) {
+      console.error('Copy failed:', e);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
